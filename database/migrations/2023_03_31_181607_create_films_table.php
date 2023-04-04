@@ -18,10 +18,12 @@ return new class extends Migration
             $table->integer('length');
             $table->text('description');
             $table->string('rating',5);
-            $table->integer('language_id');
+            $table->unsignedBigInteger('language_id');
             $table->string('special_features',200);
             $table->string('image',40);
             $table->timestamps();
+
+            //$table->foreign('language_id')->references('id')->on('languages');
         });
     }
 

@@ -10,8 +10,12 @@ class Actor_Film extends Model
     use HasFactory;
     protected $fillable = ['actor_id', 'film_id'];
 
-    public function actors()
+    public function actor()
     {
-        return $this->belongsTo('App\Actor');
+        return $this->belongsTo('app/Models/Actor');
+    }
+    public function film()
+    {
+        return $this->belongsTo('app/Models/Film');
     }
 }

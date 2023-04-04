@@ -9,4 +9,9 @@ class Language extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function films()
+    {
+        return $this->hasMany('app/Models/Film');
+    }
 }

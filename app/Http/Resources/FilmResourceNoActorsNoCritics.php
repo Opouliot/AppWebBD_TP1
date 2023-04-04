@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FilmResource extends JsonResource
+class FilmResourceNoActorsNoCritics extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,8 +23,7 @@ class FilmResource extends JsonResource
             'rating' => $this->rating,
             'language' => $this->language_id->name,
             'special features' => $this->special_features,
-            'image' => $this->image,
-            'critics' => CriticResource::collection($this->comment)
+            'image' => $this->image
         ];
     }
 }

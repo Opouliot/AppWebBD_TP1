@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('last_name',50);
             $table->string('first_name',50);
-            $table->date('birthday');
+            $table->date('birthdate');
             $table->timestamps();
         });
     }

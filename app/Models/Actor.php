@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Actor extends Model
 {
     use HasFactory;
-    protected $fillable = ['last_name', 'first_name', 'birthday'];
+    protected $fillable = ['last_name', 'first_name', 'birthdate'];
 
     public function actor_film()
     {

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('email', 50);
             $table->string('last_name', 50);
             $table->string('first_name', 50);
-            $table->unsignedBigInteger('role');
+            $table->unsignedBigInteger('role_id');
             $table->rememberToken();
             $table->timestamps();
 
-            //$table->foreign('role')->references('id')->on('roles');
+            
         });
     }
 

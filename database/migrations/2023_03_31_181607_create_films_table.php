@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image',40);
             $table->timestamps();
 
-            //$table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('language_id')->references('id')->on('languages');
         });
     }
 

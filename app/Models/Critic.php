@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Critic extends Model
 {
     use HasFactory;
+    protected $fillable = ['user_id', 'film_id', 'score', 'comment'];
 }

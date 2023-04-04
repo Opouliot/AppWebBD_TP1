@@ -12,10 +12,10 @@ class Actor_Film extends Model
 
     public function actor()
     {
-        return $this->belongsTo('app/Models/Actor');
+        return $this->belongsTo('app/Http/Models/Actor');
     }
     public function film()
     {
-        return $this->belongsTo('app/Models/Film');
+        return $this->belongsTo('app/Http/Models/Film');
     }
 }

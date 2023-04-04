@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use App\Http\Models\Language;
 class FilmResourceNoActorsNoCritics extends JsonResource
 {
     /**
@@ -21,7 +21,8 @@ class FilmResourceNoActorsNoCritics extends JsonResource
             'length' => $this->length,
             'description' => $this->description,
             'rating' => $this->rating,
-            'language' => $this->language_id->name,
+            'language' => $this->language_id,
+            //'language' => LanguageResource::collection(),
             'special features' => $this->special_features,
             'image' => $this->image
         ];

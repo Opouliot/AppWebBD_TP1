@@ -12,16 +12,16 @@ class Film extends Model
 
     public function language()
     {
-        return $this->belongsTo('app/Models/Language');
+        return $this->belongsTo('App/Models/Language');
     }
 
     public function actor_film()
     {
-        return $this->hasMany('app/Models/Actor_Film');
+        return $this->hasMany('App/Models/Actor_Film');
     }
 
     public function critics()
     {
-        return $this->hasMany('app/Models/Critic');
+        return $this->hasMany('App\Models\Critic');
     }
 }

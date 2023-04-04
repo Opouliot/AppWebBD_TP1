@@ -21,10 +21,10 @@ class FilmResource extends JsonResource
             'length' => $this->length,
             'description' => $this->description,
             'rating' => $this->rating,
-            'language' => $this->language_id->name,
+            'language' => $this->language_id,
             'special features' => $this->special_features,
             'image' => $this->image,
-            'critics' => CriticResource::collection($this->comment)
+            'critics' => CriticResource::collection($this->critics)
         ];
     }
 }

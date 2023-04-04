@@ -18,5 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/Films", "App\Http\Controllers\FilmController@index");
-Route::get("/Films/{id}", "App\Http\Controllers\FilmController@show");
+Route::get("films", "App\Http\Controllers\FilmController@index");
+Route::get("films/{id}", "App\Http\Controllers\FilmController@show");
+// CHECKER MODEL ACTOR_FILM DVRAIT ETRE ROUTE ENTRE ACTORS et FILMS BELONGSTOMANY AT BELONGS TO MANY

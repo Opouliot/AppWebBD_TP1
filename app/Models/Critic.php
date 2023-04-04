@@ -12,10 +12,10 @@ class Critic extends Model
 
     public function film()
     {
-        return $this->belongsTo('app/Models/Film');
+        return $this->belongsTo('app\Models\Film');
     }
     public function user()
     {
-        return $this->belongsTo('app/Models/User');
+        return $this->belongsTo('app/Http/Models/User');
     }
 }

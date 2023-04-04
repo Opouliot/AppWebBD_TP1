@@ -12,6 +12,6 @@ class Actor extends Model
 
     public function actor_film()
     {
-        return $this->hasMany('app/Models/Actor_Film');
+        return $this->hasMany('app/Http/Models/Actor_Film');
     }
 }

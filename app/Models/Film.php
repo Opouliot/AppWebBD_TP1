@@ -12,12 +12,12 @@ class Film extends Model
 
     public function language()
     {
-        return $this->belongsTo('App/Models/Language');
+        return $this->belongsTo('App\Models\Language');
     }
 
-    public function actor_film()
+    public function actors()
     {
-        return $this->hasMany('App/Models/Actor_Film');
+        return $this->belongsToMany(Actor::class);
     }
 
     public function critics()

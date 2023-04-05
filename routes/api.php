@@ -20,4 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("films", "App\Http\Controllers\FilmController@index");
 Route::get("films/{id}", "App\Http\Controllers\FilmController@show");
-// CHECKER MODEL ACTOR_FILM DVRAIT ETRE ROUTE ENTRE ACTORS et FILMS BELONGSTOMANY AT BELONGS TO MANY
+Route::get("films/{id}/actors", "App\Http\Controllers\FilmController@showActors");
+Route::post("films", "App\Http\Controllers\FilmController@store")->middleware('auth:sanctum', 'admin');
+Route::post("login", "App\Http\Controllers\UserController@login");
+route::post("logout", "App\Http\Controllers\UserController@logout")->middleware('auth:sanctum');

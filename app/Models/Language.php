@@ -12,6 +12,6 @@ class Language extends Model
 
     public function films()
     {
-        return $this->hasMany('app/Http/Models/Film');
+        return $this->hasMany('app\Models\Film');
     }
 }

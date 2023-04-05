@@ -10,8 +10,8 @@ class Actor extends Model
     use HasFactory;
     protected $fillable = ['last_name', 'first_name', 'birthdate'];
 
-    public function actor_film()
+    public function films()
     {
-        return $this->hasMany('app/Http/Models/Actor_Film');
+        return $this->belongsToMany(Film::class);
     }
 }

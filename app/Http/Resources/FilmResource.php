@@ -17,12 +17,12 @@ class FilmResource extends JsonResource
         return 
         [
             'title' => $this->title,
-            'release year' => $this->release_year,
+            'release_year' => $this->release_year,
             'length' => $this->length,
             'description' => $this->description,
             'rating' => $this->rating,
-            'language' => $this->language_id,
-            'special features' => $this->special_features,
+            'language_id' => $this->language_id,
+            'special_features' => $this->special_features,
             'image' => $this->image,
             'critics' => CriticResource::collection($this->critics)
         ];

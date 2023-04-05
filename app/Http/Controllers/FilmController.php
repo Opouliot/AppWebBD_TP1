@@ -63,7 +63,7 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Film::destroy($id);
     }
 
     public function showActors(string $id)

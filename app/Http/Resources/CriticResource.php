@@ -16,8 +16,8 @@ class CriticResource extends JsonResource
     {
         return 
         [
-            'user'=> $this->user_id->first_name,
-            'film' => $this->film_id->title,
+            'user'=> $this->user_id,
+            'film' => $this->film_id,
             'rating' => $this->score,
             'review' => $this->comment,
         ];

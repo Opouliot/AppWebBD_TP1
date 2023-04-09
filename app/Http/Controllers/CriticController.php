@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Critic;
 use Illuminate\Http\Request;
 
 class CriticController extends Controller
@@ -27,7 +28,8 @@ class CriticController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $critic = Critic::create($request->all());
+        return $critic;
     }
 
     /**

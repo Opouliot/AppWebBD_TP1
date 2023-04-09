@@ -46,10 +46,10 @@ class User extends Authenticatable
 
     public function critics()
     {
-        return $this->hasMany('app/Models/Critic');
+        return $this->hasMany('app\Models\Critic');
     }
     public function role()
     {
-        return $this->belongsTo('app/Models/Role');
+        return $this->belongsTo('app\Models\Role');
     }
 }

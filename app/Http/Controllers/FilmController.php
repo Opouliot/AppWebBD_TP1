@@ -14,7 +14,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return FilmResourceNoActorsNoCritics::collection(Film::all());
+        return FilmResourceNoActorsNoCritics::collection(Film::all())->response()->setStatusCode(200);
     }
 
     /**
@@ -30,7 +30,8 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $film = Film::create($request->all());
+        return $film;
     }
 
     /**
@@ -38,7 +39,7 @@ class FilmController extends Controller
      */
     public function show(string $id)
     {
-        return new FilmResource(Film::find($id));
+        return (new FilmResource(Film::find($id)))->response()->setStatusCode(200);
     }
 
     /**
@@ -62,6 +63,11 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Film::destroy($id);
+    }
+
+    public function showActors(string $id)
+    {
+        return Film::find($id)->actors;
     }
 }

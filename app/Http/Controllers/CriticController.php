@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Critic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CriticController extends Controller
 {
@@ -28,6 +29,18 @@ class CriticController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+
+            'user_id' => 'required',
+            'film_id' => 'required',
+            'score' => 'required',
+            'comment' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            abort(422, 'Invalid data');
+        }
+
         $critic = Critic::create($request->all());
         return $critic;
     }

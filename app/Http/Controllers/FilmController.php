@@ -5,16 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Resources\FilmResourceNoActorsNoCritics;
 use App\Http\Resources\FilmResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Film;
+use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Events\QueryExecuted;
 
 class FilmController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return FilmResourceNoActorsNoCritics::collection(Film::all())->response()->setStatusCode(200);
+        //try
+        //{
+        if (!$request->hasAny(['keywords', 'rating', 'max-length'])) {
+            return FilmResourceNoActorsNoCritics::collection(Film::all())->response()->setStatusCode(200);
+        }
+
+        $films = Film::query();
+        $films->where('rating' == 'PG')->get();
+        dump($films);
+        //} catch (Exception $ex) {
+        //    abort(500, 'server error');
+        //}
     }
 
     /**
@@ -30,6 +45,21 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'release_year' => 'required',
+            'length' => 'required',
+            'description' => 'required',
+            'rating' => 'required',
+            'language_id' => 'required',
+            'special_features' => 'required',
+            'image' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            abort(422, 'Invalid data');
+        }
+
         $film = Film::create($request->all());
         return $film;
     }
@@ -39,7 +69,13 @@ class FilmController extends Controller
      */
     public function show(string $id)
     {
-        return (new FilmResource(Film::find($id)))->response()->setStatusCode(200);
+        try {
+            return (new FilmResource(Film::findOrFail($id)))->response()->setStatusCode(200);
+        } catch (QueryException $ex) {
+            abort(404, 'Invalid id');
+        } catch (Exception $ex) {
+            abort(500, 'server error');
+        }
     }
 
     /**
@@ -68,6 +104,12 @@ class FilmController extends Controller
 
     public function showActors(string $id)
     {
-        return Film::find($id)->actors;
+        try {
+            return Film::findOrFail($id)->actors;
+        } catch (QueryException $ex) {
+            abort(404, 'Invalid id');
+        } catch (Exception $ex) {
+            abort(500, 'server error');
+        }
     }
 }

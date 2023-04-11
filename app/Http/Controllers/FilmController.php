@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\FilmResourceNoActorsNoCritics;
 use App\Http\Resources\FilmResource;
+use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Film;
-use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Events\QueryExecuted;
+use Exception;
 
 class FilmController extends Controller
 {
@@ -18,18 +19,29 @@ class FilmController extends Controller
      */
     public function index(Request $request)
     {
-        //try
-        //{
-        if (!$request->hasAny(['keywords', 'rating', 'max-length'])) {
-            return FilmResourceNoActorsNoCritics::collection(Film::all())->response()->setStatusCode(200);
-        }
+        try {
+            if (!$request->hasAny(['keywords', 'rating', 'maxlength'])) {
+                return FilmResourceNoActorsNoCritics::collection(Film::all())->response()->setStatusCode(200);
+            }
 
-        $films = Film::query();
-        $films->where('rating' == 'PG')->get();
-        dump($films);
-        //} catch (Exception $ex) {
-        //    abort(500, 'server error');
-        //}
+            $films = DB::table('films');
+
+            if ($request->has('keywords')) {
+                $films->where('title', $request->keywords);
+            }
+
+            if ($request->has('rating')) {
+                $films->where('rating', $request->rating);
+            }
+
+            if ($request->has('maxlength')) {
+                $films->where('length', $request->maxlength);
+            }
+
+            return $films->get();
+        } catch (Exception $ex) {
+            abort(500, 'server error');
+        }
     }
 
     /**

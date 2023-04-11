@@ -12,21 +12,20 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function login(Request $request)
-     {
+    {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        
-        if(Auth::attempt($credentials))
-        {
+
+        if (Auth::attempt($credentials)) {
 
             $token = $request->user()->createToken('token');
         }
-        
+
         return ['token' => $token->plainTextToken];
     }
-    
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -34,8 +33,7 @@ class UserController extends Controller
 
     public function show(string $id)
     {
-        if(Auth::user()->id != $id)
-        {
+        if (Auth::user()->id != $id) {
             throw new Exception("Vous n'avez pas accès à ce profil!", 403);
         }
         return (new UserResource(User::find($id)))->response()->setStatusCode(200);
@@ -43,28 +41,24 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        
 
-        if(User::all()->where('email', $request->email)->count() >= 1)
-        {
+
+        if (User::all()->where('email', $request->email)->count() >= 1) {
             throw new Exception("Cet email est déjà utilisé!", 403);
         }
         $user = User::create($request->all());
         return $user;
-        
     }
 
     public function update(Request $request, string $id)
     {
-        if(Auth::user()->id != $id)
-        {
+        if (Auth::user()->id != $id) {
             throw new Exception("Vous n'avez pas accès à ce profil!", 403);
         }
 
         $user = User::find($id);
 
-        if(User::all()->where('email', $request->email)->count() >= 1)
-        {
+        if (User::all()->where('email', $request->email)->count() >= 1) {
             throw new Exception("Cet email est déjà utilisé!", 403);
         }
         $user->email = $request->email;
@@ -77,8 +71,7 @@ class UserController extends Controller
 
     public function updatePassword(Request $request, string $id)
     {
-        if(Auth::user()->id != $id)
-        {
+        if (Auth::user()->id != $id) {
             throw new Exception("Vous n'avez pas accès à ce profil!", 403);
         }
 
